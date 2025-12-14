@@ -89,12 +89,12 @@ ArgoCD is a powerful GitOps continuous delivery tool for Kubernetes, and in this
 
 
 # Get EKS Cluster service
-eksctl get cluster --name eks-cluster-110 --region eu-west-2
+eksctl get cluster --name eks-cluster-100 --region eu-north-1
 
 <img width="2222" height="258" alt="Image" src="https://github.com/user-attachments/assets/1dfc2873-aabd-4c92-b537-58f2200726ce" />
  
  # Update eks kubeconfig once k8s cluster is installed successfully
-aws eks update-kubeconfig --name eks-cluster-110
+aws eks update-kubeconfig --name eks-cluster-100
 
 <img width="2184" height="122" alt="Image" src="https://github.com/user-attachments/assets/203aa32a-f387-4b7a-970d-24192907571a" />
 
@@ -123,7 +123,7 @@ kubectl get svc -n argocd
 # then get argocd from the webbrowser by edit the service of LoadBalancer
 kubectl edit svc argocd-server -n argocd
 
-# change it to clusterIP to LoadBalancer
+# change it clusterIP to "LoadBalancer"
 
 # then run
 

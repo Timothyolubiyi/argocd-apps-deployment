@@ -24,27 +24,32 @@ ArgoCD is a powerful GitOps continuous delivery tool for Kubernetes, and in this
 - Deploying an application using ArgoCD
 - Performing a rollback to a previous version (CLI & Web UI methods)
 
+## Build the Docker Image
+npm 
+
+
 ## By the end of this project i learnt  hands-on knowledge of how to manage Kubernetes deployments with GitOps using ArgoCD.
+
 # Create EKS cluster
 
   eksctl create cluster \
-  --name eks-cluster-110 \
+  --name eks-cluster-100 \
   --version 1.29 \
-  --region eu-west-2 \
+  --region eu-north-1 \
   --nodegroup-name ng-1 \
-  --node-type t2.small \
+  --node-type t3.medium \
   --nodes 2 \
   --nodes-min 1 \
   --nodes-max 3
 
 
 # Get EKS Cluster service
-eksctl get cluster --name eks-cluster-110 --region eu-west-2
+eksctl get cluster --name eks-cluster-100 --region eu-north-1
 
 <img width="2222" height="258" alt="Image" src="https://github.com/user-attachments/assets/1dfc2873-aabd-4c92-b537-58f2200726ce" />
  
  # Update eks kubeconfig once k8s cluster is installed successfully
-aws eks update-kubeconfig --name eks-cluster-110
+aws eks update-kubeconfig --name eks-cluster-100
 
 <img width="2184" height="122" alt="Image" src="https://github.com/user-attachments/assets/203aa32a-f387-4b7a-970d-24192907571a" />
 
@@ -144,6 +149,6 @@ kubectl get pods
 
 # to delete cluster
 
-eksctl delete cluster --name eks-cluster-110
+eksctl delete cluster --name eks-cluster-100
 
 
