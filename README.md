@@ -29,7 +29,7 @@ as landing page an server test page,to check if the server is litening at port:3
 
   Create Docker account
 
-  Install Docker CLI or Docker deckstop
+  Install Docker CLI or Docker desktop
 
   Retrieve and save your Dockerhub user id
 
@@ -56,7 +56,7 @@ $ docker build -t $docker_username/deploy-react-kubernetes .
 
 ## test the application locally
 
-docker run -p 8000:8000 good777lord/pyapplication:v1
+docker run -p 8080:8080 smartgigsctf/pyapplication:v1
 ## Tools stack:
 
 project workflow
@@ -78,11 +78,11 @@ ArgoCD is a powerful GitOps continuous delivery tool for Kubernetes, and in this
 ## By the end of this project i learnt  hands-on knowledge of how to manage Kubernetes deployments with GitOps using ArgoCD.
 
   eksctl create cluster \
-  --name eks-cluster-110 \
+  --name eks-cluster-100 \
   --version 1.29 \
-  --region eu-west-2 \
+  --region eu-north-1 \
   --nodegroup-name ng-1 \
-  --node-type t2.small \
+  --node-type t3.medium \
   --nodes 2 \
   --nodes-min 1 \
   --nodes-max 3

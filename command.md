@@ -17,7 +17,7 @@ What thr project Does:
 # 1. Create an EKS Cluster using this command:
 
 
-In this project ilearnt how to install ArgoCD on Kubernetes, deploy an application, and rollback to a previous version using the Web UI.
+In this project I learnt how to install ArgoCD on Kubernetes, deploy an application, and rollback to a previous version using the Web UI.
 
 ArgoCD is a powerful GitOps continuous delivery tool for Kubernetes, and in this step-by-step project ,i will cover:
 - Installing ArgoCD on a Kubernetes cluster

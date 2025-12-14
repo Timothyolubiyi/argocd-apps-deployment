@@ -10,7 +10,7 @@
 const express = require('express');
 
 // Constants
-const PORT = 8000;
+const PORT = 8080;
 const HOST = '0.0.0.0';
 const OS = require('os');
 const ENV = 'DEVELOPMENT';
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   res.send(getPage(msg));
 });
 app.get('/dev', (req, res) => {
-    res.send('<h1 style="color:green;">This is- version-2!!</h1> \n');
+    res.send('<h1 style="color:green;">This is- version-1!!</h1> \n');
   });
   
 app.get('/test', (req, res) => {
