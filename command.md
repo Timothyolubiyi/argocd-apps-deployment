@@ -24,13 +24,57 @@ ArgoCD is a powerful GitOps continuous delivery tool for Kubernetes, and in this
 - Deploying an application using ArgoCD
 - Performing a rollback to a previous version (CLI & Web UI methods)
 
-## Build the Docker Image
-npm 
+## CREATE EC2 INSTANCE
+
+1. # INSTALL EKSCTL
+
+##copy all in this stage and paste
+
+# install eksctl
+
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
 
 
-## By the end of this project i learnt  hands-on knowledge of how to manage Kubernetes deployments with GitOps using ArgoCD.
+2. # INSTALL AWSCLI 
 
-# Create EKS cluster
+# install aws cli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
+sudo apt install unzip 
+unzip awscliv2.zip 
+sudo ./aws/install
+
+#check the version
+
+aws --version
+
+
+# Configure AWS
+
+aws configure
+
+3. # INSTALL KUBECTL
+
+## copy all in this stage and paste
+
+#give permissions to kubectl
+
+#1. Download the latest stable kubectl binary
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+#2. Make the binary executable
+chmod +x kubectl
+
+#3. Move it to a directory in your PATH
+sudo mv kubectl /usr/local/bin/
+
+#4. Verify installation (client version only)
+kubectl version --client
+
+4. # Create EKS cluster
 
   eksctl create cluster \
   --name eks-cluster-100 \
@@ -80,7 +124,7 @@ kubectl get edit svc argocd-server -n argocd
 
 # change it to clusterIP to LoadBalancer
 
-#then run
+# then run
 
 kubectl get svc -n argocd
 
@@ -144,11 +188,47 @@ now access the pyappservice and put into the browser from the load balancer
 # now after we refresh argocd it will detect the changes
 
 # now run 
+&kubectl get pods
+
+# INSTALL DOCKER ON THE EC2 SERVER
+sudo apt update
+sudo apt install -y docker.io
+
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+newgrp docker
+groups
+ls -l /var/run/docker.sock
+
+# correct output should be same below
+srw-rw---- 1 root docker ...
+
+
+# CHANGE THE VERSION OF THE APP ON "K8S > deployment.yaml" on github
+Save the file and build the image with below;
+
+
+
+$docker build -t smartgigsctf/pyapplication:v2 .
+
+$docker images
+docker push
+
+# LOGIN TO DOCKER
+
+$docker login -u smartgigsctf   ## input password on the prompt
+docker push smartgigsctf/pyapplication:v2
+
+## GO TO ARGODC DASHBOARD AND REFRESH ##
 kubectl get pods
+kubectl get svc   ## to get loadbalancer url to access the application on web page
 
 
-# to delete cluster
+## To delete cluster
 
 eksctl delete cluster --name eks-cluster-100
+
 
 

@@ -184,17 +184,51 @@ now access the pyappservice and put into the browser from the load balancer
 <img width="2446" height="1386" alt="Image" src="https://github.com/user-attachments/assets/f7f4a439-60f6-4d4f-92b8-d308ef04af33" />
 
 
-
-
 # now after we refresh argocd it will detect the changes
 
 # now run 
+&kubectl get pods
+
+# INSTALL DOCKER ON THE EC2 SERVER
+sudo apt update
+sudo apt install -y docker.io
+
+sudo systemctl status docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+newgrp docker
+groups
+ls -l /var/run/docker.sock
+
+# correct output should be same below
+srw-rw---- 1 root docker ...
+
+
+# CHANGE THE VERSION OF THE APP ON "K8S > deployment.yaml" on github
+Save the file and build the image with below;
+
+
+
+$docker build -t smartgigsctf/pyapplication:v2 .
+
+$docker images
+docker push
+
+# LOGIN TO DOCKER
+
+$docker login -u smartgigsctf   ## input password on the prompt
+docker push smartgigsctf/pyapplication:v2
+
+## GO TO ARGODC DASHBOARD AND REFRESH ##
 kubectl get pods
+kubectl get svc   ## to get loadbalancer url to access the application on web page
 
 
-# to delete cluster
 
-eksctl delete cluster --name eks-cluster-110
+## to delete cluster
+
+eksctl delete cluster --name eks-cluster-100
 
 
 
